@@ -1,5 +1,7 @@
 # Angular21
 
+> **Nota:** Este proyecto es una aplicación Angular 21 creada para fines educativos y de desarrollo. A continuación se presentan las guías y comandos necesarios para trabajar con este repositorio.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
 
 ## Development server
