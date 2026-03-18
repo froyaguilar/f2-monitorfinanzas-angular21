@@ -1,0 +1,37 @@
+<div class="view-container">
+  <header class="header-view">
+    <div>
+      <h1>Criptomonedas</h1>
+      <p>Sincronizado con CoinGecko API</p>
+    </div>
+    <button class="btn-refresh" (click)="onRefresh()">🔄 Actualizar</button>
+  </header>
+
+  @if (loadStatus() === 1) {
+    <div class="list-container">
+      @for (coin of allCoins(); track coin.id) {
+        <div class="item-row">
+          <div class="item-id">
+            <span class="symbol">{{ coin.symbol }}</span>
+            <span class="name">{{ coin.name }}</span>
+          </div>
+          
+          <div class="item-values">
+            <span class="val-usd" [id]="'price-usd-' + coin.id">
+              {{ coin.usd | currency:'USD':'symbol':'1.0-2' }}
+            </span>
+            <span class="val-mxn" [id]="'price-mxn-' + coin.id">
+              {{ coin.mxn | currency:'MXN':'$':'1.0-0' }}
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+  } 
+  @else if (loadStatus() === -1) {
+    <div class="status-msg error">⚠️ No se pudo conectar con los mercados cripto.</div>
+  } 
+  @else {
+    <div class="status-msg loading">⏳ Cargando precios...</div>
+  }
+</div>

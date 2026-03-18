@@ -1,4 +1,5 @@
-/*
-  Estilos CSS para el componente raíz (Shell).
-  Normalmente este archivo estará vacío o contendrá estilos mínimos para el layout principal.
+/* 
+  Estilos del Componente Shell (App).
+  Los estilos globales se han movido a src/styles.css para permitir que todos los 
+  componentes del router hereden el sistema de diseño Navy Minimalista.
 */

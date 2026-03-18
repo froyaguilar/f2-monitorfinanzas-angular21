@@ -1,61 +1,48 @@
-# Angular21
+# 🚀 Angular 21 + Playwright: Dashboard Cripto Profesional
 
-> **Nota:** Este proyecto es una aplicación Angular 21 creada para fines educativos y de desarrollo. A continuación se presentan las guías y comandos necesarios para trabajar con este repositorio.
+Este proyecto es una implementación avanzada de **Angular v21** que sigue el patrón de arquitectura **MVC (Modelo-Vista-Controlador)** para una organización de código escalable y profesional.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+## 🏗️ Estructura del Proyecto (MVC)
 
-## Development server
+El proyecto está organizado de la siguiente manera:
+- **`src/app/core/`**: Configuración global, interceptores y rutas. (El "motor" de la aplicación).
+- **`src/app/models/`**: Definición de datos y tipos.
+- **`src/app/services/`**: Lógica de negocio y llamadas a APIs externas.
+- **`src/app/views/`**: Componentes autónomos (Standalone) que actúan como la interfaz de usuario.
 
-To start a local development server, run:
+---
 
+## 💎 Características Principales
+
+### 📈 Signals Reactivas y Computed (Angular 21)
+- Utilizamos **Angular Signals** para un manejo del estado ultra-rápido y eficiente.
+- Implementación de **`computed()`** para la conversión automática de divisas (USD a MXN) sin procesos redundantes.
+- Uso del **`CurrencyPipe`** para un formateo de moneda profesional y localizado.
+
+---
+
+## 🛡️ Estrategia de Pruebas (Inteligentes)
+
+Hemos reemplazado los tests unitarios tradicionales y frágiles por **Pruebas de Integración y End-to-End (E2E)** potentes:
+
+### 🎭 Playwright
+Garantizamos que el flujo real del usuario funcione perfectamente:
+- Verificación de la **disponibilidad y carga de APIs externas** (CoinGecko).
+- Pruebas de navegación real entre vistas (`/` y `/home`).
+- Validación de **renders automáticos** tras cambios de estado en las señales.
+
+**Para ejecutar las pruebas:**
 ```bash
-ng serve
+npm run e2e
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ Tecnologías Utilizadas
+- **Angular 21** (Standalone Components + Signals)
+- **Playwright** (E2E Testing en Chrome/Edge real)
+- **Vitest** (Unit Testing de alto rendimiento)
+- **Prettier** (Estilo de código impecable)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+*Desarrollado con pasión para un aprendizaje profesional de Angular.*

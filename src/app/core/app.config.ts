@@ -1,16 +1,30 @@
 /**
- * Configuración global de la aplicación.
- * Define los proveedores necesarios para el funcionamiento de la aplicación Angular,
- * incluyendo la configuración de rutas y otros servicios globales.
+ * CONFIGURACIÓN GLOBAL DE LA APLICACIÓN (app.config.ts)
  */
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    /**
+     * 🚀 MODO ZONELESS (ESTABLE EN VERSION 21?)
+     * Probamos si ya no es experimental.
+     */
+    provideZonelessChangeDetection(),
+
+    /**
+     * Sistema de rutas
+     */
+    provideRouter(routes),
+
+    /**
+     * Cliente HTTP con interceptor para manejo centralizado de errores.
+     */
+    provideHttpClient(
+      withInterceptors([errorInterceptor])
+    )
   ]
 };

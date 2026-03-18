@@ -1,5 +1,147 @@
 /* 
-  Estilos globales de la aplicación.
-  Aquí se pueden definir reglas de diseño que afectarán a todos los componentes del proyecto.
+  🎨 DISEÑO GLOBAL MINIMALISTA (AZUL MARINO - MVC Dashboard)
+  Este archivo maneja todos los estilos compartidos por los componentes.
 */
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+  /* 🔵 PALETA: Slate & Navy */
+  --bg: #0f172a;           /* Fondo principal */
+  --bg-dark: #132268;      /* Cabecera / Pie */
+  --card-bg: #1e293b;      /* Tarjeta / Filas hover */
+  --accent: #38bdf8;       /* Celeste acento */
+  --text-main: #354b61;    /* Texto base */
+  --text-dim: #94a3b8;     /* Texto secundario */
+  --border: #334155;       /* Bordes */
+  --radius: 8px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 🧱 RESET BASE: Diseño fluído y tipografía */
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text-main);
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* ⚓ SHELL: Elementos del AppLayout */
+.app-header {
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.header-container {
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+
+.logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+
+.main-nav { display: flex; gap: 1rem; }
+
+.main-nav a {
+  color: var(--text-dim); text-decoration: none;
+  font-size: 0.9rem; font-weight: 500;
+  padding: 0.4rem 0.8rem; border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.main-nav a.active {
+  color: var(--accent); background: rgba(56, 189, 248, 0.1);
+}
+
+/* 📱 CONTENEDOR DE VISTAS (Dentro de router-outlet) */
+.app-content {
+  max-width: 1000px; margin: 0 auto;
+  padding: 2rem 1.5rem; min-height: calc(100vh - 140px);
+}
+
+.view-container { animation: fadeIn 0.4s ease-out; }
+
+/* 📊 HEADER DE CADA VISTA: Título + Botón Actualizar */
+.header-view { 
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.header-view h1 { font-size: 1.75rem; font-weight: 800; margin: 0; color: var(--text-main); }
+.header-view p { color: var(--text-dim); font-size: 0.95rem; margin-top: 0.25rem; }
+
+.btn-refresh {
+  background: var(--bg-dark); color: var(--accent);
+  border: 1px solid var(--border); padding: 0.4rem 0.8rem;
+  border-radius: var(--radius); font-size: 0.8rem; font-weight: 700;
+  cursor: pointer; transition: var(--transition);
+}
+
+.btn-refresh:hover { background: var(--card-bg); border-color: var(--accent); }
+
+/* 📋 LISTADOS Y TABLAS */
+.list-container {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+
+.item-row {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.item-row:last-child { border-bottom: none; }
+.item-row:hover { background: var(--card-bg); }
+
+.item-id { display: flex; align-items: baseline; gap: 0.75rem; }
+.symbol { font-weight: 700; color: var(--accent); }
+.name { color: var(--text-dim); font-size: 0.85rem; }
+
+.item-values {
+  display: flex; gap: 1.5rem; align-items: center;
+  font-family: 'Inter', sans-serif; color: var(--text-main);
+}
+
+.item-values :is(.val-mxn, .val-stock, .val-usd) {
+  min-width: 100px; text-align: right; font-weight: 600;
+}
+
+/* 📈 INDICADORES DE CAMBIO */
+.change {
+  font-size: 0.8rem; font-weight: 800;
+  padding: 0.25rem 0.5rem; border-radius: 4px;
+  min-width: 65px; text-align: center;
+}
+
+.change.up { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+.change.down { color: #f43f5e; background: rgba(244, 63, 94, 0.1); }
+
+/* ⚠️ ESTADOS DE CARGA Y ERROR: ¡Crucial para Visual Testing! */
+.status-msg {
+  padding: 4rem; text-align: center;
+  color: var(--text-dim); font-size: 0.9rem;
+}
+
+.status-msg.error {
+  color: #f43f5e; background: rgba(244, 63, 94, 0.05);
+  border: 1px dashed rgba(244, 63, 94, 0.2);
+  border-radius: var(--radius);
+}
+
+/* 🦶 FOOTER */
+.app-footer {
+  border-top: 1px solid var(--border); padding: 2rem;
+  text-align: center; color: var(--text-dim); font-size: 0.8rem;
+}
+
+.footer-links { margin-top: 0.5rem; }
+.footer-links a { color: var(--accent); text-decoration: none; margin: 0 0.5rem; }
+
+/* ✨ ANIMACIONES */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

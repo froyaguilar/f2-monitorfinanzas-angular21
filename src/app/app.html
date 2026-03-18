@@ -1,6 +1,25 @@
-<!-- 
-  Plantilla raíz de la aplicación.
-  Actúa como el contenedor principal o 'Shell' que carga las diferentes vistas
-  utilizando el sistema de rutas.
--->
-<router-outlet />
+<div class="app-layout">
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="logo" routerLink="/" style="cursor: pointer;">🚀 FinanceApp v21</div>
+      <nav class="main-nav" role="navigation" aria-label="Navegación Principal">
+        <a routerLink="/cryptos" routerLinkActive="active">🪙 Cryptos</a>
+        <a routerLink="/stocks" routerLinkActive="active">📈 Stocks</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Usamos ID para el enlace de salto y rol main para SEO -->
+  <main id="main-content" class="app-content" role="main">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <p>© 2026 Dashboard Financiero Profesional | Estructura MVC & Signals</p>
+      <div class="footer-links">
+        <a href="#">Privacidad</a> • <a href="#">Términos</a> • <a href="#">Soporte</a>
+      </div>
+    </div>
+  </footer>
+</div>

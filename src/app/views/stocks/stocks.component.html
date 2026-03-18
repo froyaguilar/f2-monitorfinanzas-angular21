@@ -1,0 +1,33 @@
+<div class="view-container">
+  <header class="header-view">
+    <div>
+      <h1>Mercado de Valores</h1>
+      <p>Índice de "Las 7 Magníficas" (Nasdaq)</p>
+    </div>
+    <button class="btn-refresh" (click)="onRefresh()">🔄 Actualizar</button>
+  </header>
+
+  @if (loadStatus() === 0) {
+    <div class="status-msg loading">⌛ Cargando precios de Wall Street...</div>
+  } @else if (loadStatus() === -1) {
+    <div class="status-msg error">⚠️ No se pudo obtener la cotización. Verifica tu conexión o API Key.</div>
+  } @else {
+    <div class="list-container">
+      @for (stock of stocks(); track stock.symbol) {
+        <div class="item-row">
+          <div class="item-id">
+            <span class="symbol">{{ stock.symbol }}</span>
+            <span class="name">{{ stock.name }}</span>
+          </div>
+          
+          <div class="item-values">
+            <span class="val-stock">{{ stock.price | currency:'USD' }}</span>
+            <span class="change" [ngClass]="stock.change >= 0 ? 'up' : 'down'">
+              {{ stock.change >= 0 ? '+' : '' }}{{ stock.change / 100 | percent:'1.2-2' }}
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

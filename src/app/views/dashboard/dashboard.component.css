@@ -1,0 +1,92 @@
+/* 🎨 ESTILOS LOCALES DEL DASHBOARD (BIENVENIDA) */
+
+.welcome-content {
+  text-align: center;
+}
+
+/* 🃏 GRILLA DE TARJETAS: Diseño moderno y espaciado */
+.welcome-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+/* 💎 TARJETA DE INFORMACIÓN: Minimalismo Navy */
+.info-card {
+  background: var(--bg-dark);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  background: var(--card-bg);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.info-card p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 🔗 ENLACE DE ACCIÓN: Sutil pero visible */
+.btn-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 🛡️ SECCIÓN TÉCNICA: Resumen de arquitectura */
+.tech-section {
+  margin-top: 4rem;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.tech-section h3 {
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-list li {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.feature-list li strong {
+  color: var(--accent);
+  font-size: 0.95rem;
+}
