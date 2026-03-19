@@ -25,15 +25,24 @@ El proyecto está organizado de la siguiente manera:
 
 Hemos reemplazado los tests unitarios tradicionales y frágiles por **Pruebas de Integración y End-to-End (E2E)** potentes:
 
-### 🎭 Playwright
-Garantizamos que el flujo real del usuario funcione perfectamente:
-- Verificación de la **disponibilidad y carga de APIs externas** (CoinGecko).
-- Pruebas de navegación real entre vistas (`/` y `/home`).
-- Validación de **renders automáticos** tras cambios de estado en las señales.
+### 🎭 Playwright & End-to-End (E2E)
+**¿Qué es E2E?**
+Las pruebas **End-to-End (Extremo a Extremo)** simulan el comportamiento real de un usuario en el navegador. A diferencia de las pruebas unitarias que prueban funciones aisladas, el E2E verifica que TODO el sistema funcione: desde la llamada a la API hasta que los datos aparecen pintados en la pantalla con el estilo correcto.
+
+**Implementación:**
+- **Localización:** Los tests residen en la carpeta `tests/` en la raíz del proyecto.
+- **Flujos verificados:** 
+    - Navegación entre vistas (Home -> Cryptos -> Stocks).
+    - Carga real de datos desde APIs externas.
+    - **Visual Testing:** Verificación de que el diseño Navy Minimalista y los estados de error se vean correctamente (e.g. `error-visual.spec.ts`).
 
 **Para ejecutar las pruebas:**
 ```bash
-npm run e2e
+# Ejecutar todas las pruebas en segundo plano
+npx playwright test
+
+# Ejecutar una prueba específica viendo el navegador (Headed)
+npx playwright test tests/error-visual.spec.ts --headed
 ```
 
 ---

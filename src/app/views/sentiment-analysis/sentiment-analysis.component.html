@@ -1,0 +1,129 @@
+<div class="sentiment-container">
+
+  <!-- ============================================================
+       HEADER: Título y descripción de la sección
+       ============================================================ -->
+  <header class="sentiment-header">
+    <h1>Análisis de Sentimiento <span class="ai-badge">Groq IA</span></h1>
+    <p>Escribe sobre un activo. Nuestra IA determinará si eres alcista, bajista y con qué porcentaje de confianza.</p>
+  </header>
+
+  <div class="sentiment-layout">
+
+    <!-- ============================================================
+         LEFT: Formulario Reactivo de entrada
+         Reactive Forms controlan el INPUT del usuario.
+         ============================================================ -->
+    <section class="analysis-form-card">
+      <h2 class="card-title">📝 Nuevo Análisis</h2>
+
+      <form [formGroup]="analysisForm" (ngSubmit)="submitAnalysis()">
+
+        <!-- Campo: Activo financiero -->
+        <div class="input-group">
+          <label for="asset">Activo:</label>
+          <input
+            id="asset"
+            type="text"
+            formControlName="asset"
+            placeholder="Ej: BTC, AAPL, ETH, SP500..."
+            autocomplete="off"
+            [class.invalid]="analysisForm.get('asset')?.invalid && analysisForm.get('asset')?.touched">
+          @if (analysisForm.get('asset')?.invalid && analysisForm.get('asset')?.touched) {
+            <span class="error-hint">Mínimo 2 caracteres requeridos</span>
+          }
+        </div>
+
+        <!-- Campo: Comentario de análisis -->
+        <div class="input-group">
+          <label for="comment">Tu análisis:</label>
+          <textarea
+            id="comment"
+            formControlName="comment"
+            rows="5"
+            placeholder="Ej: BTC está rompiendo resistencias clave y el volumen está aumentando. Señal alcista."
+            [class.invalid]="analysisForm.get('comment')?.invalid && analysisForm.get('comment')?.touched"></textarea>
+          @if (analysisForm.get('comment')?.invalid && analysisForm.get('comment')?.touched) {
+            <span class="error-hint">Mínimo 5 caracteres requeridos</span>
+          }
+        </div>
+
+        <!-- Botón de envío: deshabilitado si el form es inválido o está procesando -->
+        <button
+          id="btn-submit-analysis"
+          type="submit"
+          [disabled]="analysisForm.invalid || isAnalyzing()">
+          @if (isAnalyzing()) {
+            <span class="spinner"></span> Consultando a Groq IA...
+          } @else {
+            🚀 Analizar y Guardar
+          }
+        </button>
+
+        <!-- Mensaje de éxito/error, manejado por Signal -->
+        @if (successMessage()) {
+          <div class="alert" [class.is-error]="successMessage().includes('❌')">
+            {{ successMessage() }}
+          </div>
+        }
+      </form>
+    </section>
+
+    <!-- ============================================================
+         RIGHT: Feed reactivo de análisis guardados
+         Este feed se actualiza automáticamente gracias al Signal.
+         ============================================================ -->
+    <section class="analysis-feed">
+      <div class="feed-header">
+        <h2>Feed de Análisis 📈</h2>
+        <span class="count">{{ analyses().length }} guardados</span>
+      </div>
+
+      <div class="feed-list">
+        <!--
+          @for: Control flow moderno de Angular (v17+).
+          'track item.id': le dice a Angular qué propiedad usar
+          para identificar cada ítem y optimizar el re-renderizado.
+        -->
+        @for (item of analyses(); track item.id) {
+          <article class="feed-card">
+            <div class="feed-card-header">
+              <span class="asset-tag">{{ item.asset }}</span>
+              <div class="sentiment-info">
+                <span
+                  class="sentiment-chip"
+                  [ngClass]="getSentimentClass(item.sentiment)">
+                  {{ getSentimentEmoji(item.sentiment) }} {{ item.sentiment }}
+                </span>
+                <!-- Barra de confianza del IA -->
+                <div class="confidence-bar-container" title="{{ item.confidence }}% de confianza">
+                  <div
+                    class="confidence-bar"
+                    [ngClass]="getSentimentClass(item.sentiment)"
+                    [style.width.%]="item.confidence">
+                  </div>
+                  <span class="confidence-label">{{ item.confidence }}%</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="feed-comment">{{ item.comment }}</p>
+
+            <footer class="feed-card-footer">
+              <!-- DatePipe: convierte el timestamp ISO de Mongo a fecha legible -->
+              <time>{{ item.createdAt | date: 'dd MMM yyyy, HH:mm' }}</time>
+            </footer>
+          </article>
+        }
+
+        <!-- Estado vacío: se muestra cuando no hay análisis -->
+        @empty {
+          <div class="empty-feed">
+            <p>🔍 No hay análisis aún. ¡Añade el primero!</p>
+          </div>
+        }
+      </div>
+    </section>
+
+  </div>
+</div>

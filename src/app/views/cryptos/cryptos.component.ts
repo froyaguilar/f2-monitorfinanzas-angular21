@@ -9,6 +9,10 @@ import { CryptoService } from '../../services/crypto.service';
 @Component({
   selector: 'app-cryptos',
   standalone: true,
+  /**
+   * 🛠️ UTILIDADES DE UI (Pipes)
+   * CurrencyPipe: Transforma números en formato de moneda local/extranjera.
+   */
   imports: [CurrencyPipe],
   templateUrl: './cryptos.component.html',
   styleUrl: './cryptos.component.css'
@@ -20,9 +24,25 @@ export class CryptosComponent implements OnInit {
   private readonly cryptoSvc = inject(CryptoService);
 
   /**
-   * 📊 SEÑALES: Obtenemos los datos reactivos del servicio
+   * 📊 SEÑALES REACTIVAS
+   * cryptos: Lista base en USD.
+   * rate: Tasa de cambio actual.
    */
-  allCoins = this.cryptoSvc.cryptos;
+  private rawCoins = this.cryptoSvc.cryptos;
+  private rate = this.cryptoSvc.exchangeRate;
+
+  /**
+   * 💰 CONVERSIÓN DINÁMICA (COMPUTED)
+   * ¡Aquí ocurre la magia! No guardamos el MXN en la base de datos ni en el model.
+   * Se calcula al vuelo solo cuando rawCoins o rate cambian. 
+   * Sin procesos redundantes y 100% reactivo.
+   */
+  allCoins = computed(() => {
+    return this.rawCoins().map(coin => ({
+      ...coin,
+      mxn: coin.usd * this.rate()
+    }));
+  });
 
   /**
    * ⏳ ESTADO: Determina si estamos cargando (0), éxito (1) o error (-1)

@@ -4,6 +4,8 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from '../views/dashboard/dashboard.component';
 import { CryptosComponent } from '../views/cryptos/cryptos.component';
 import { StocksComponent } from '../views/stocks/stocks.component';
+import { SentimentAnalysisComponent } from '../views/sentiment-analysis/sentiment-analysis.component';
+
 
 /**
  * 🛣️ SISTEMA DE RUTAS (app.routes.ts)
@@ -27,6 +29,12 @@ export const routes: Routes = [
    * 📈 RUTA STOCKS: Mercado de valores (Nasdaq) 
    */
   { path: 'stocks', component: StocksComponent },
+
+  /** 
+   * 🤖 RUTA SENTIMIENTO: Análisis con IA 
+   */
+  { path: 'sentiment', component: SentimentAnalysisComponent },
+
   
   /** 
    * 🛠️ COMODÍN (**): Redirección de seguridad
