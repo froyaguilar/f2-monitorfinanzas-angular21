@@ -10,7 +10,7 @@
     "e2e": "playwright test"
   },
   "private": true,
-  "packageManager": "npm@11.7.0",
+  "packageManager": "npm@12.1.0",
   "dependencies": {
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
